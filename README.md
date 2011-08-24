@@ -13,24 +13,40 @@ Protorails shall be used as any another dependency in a Rails application, inclu
 
 # Add as dependency
 
+In your Rails 3 project, you should modify your Gemfile with this line:
+
     gem 'protorails'
 
+Currently protorails has not been published yet, so please use directly this github repository:
+
+	gem 'protorails', :git => 'git@github.com:juandebravo/protorails.git'
+
 # Install
+
+Protorails needs to define new mime types and renderers. This can be done executing the following command:
 
     rake generate protorails:install
 
 This command will include the required configuration to allow the protojson specific formats:
 
-    render indexed:object 
-    render tagmap:object
+    render indexed: object 
+    render tagmap: object
 
 A client request can specify the desired data format as usual, including the Accept HTTP header or including the format as a suffix in the URI. This command defines also two new supported formats:
 
     application/indexed
+        => curl -H "Accept: application/indexed" http://localhost:3000/index
+        => curl http://localhost:3000/index.indexed
+
     application/tagmap
+    => curl -H "Accept: application/tagmap" http://localhost:3000/index
+    => curl http://localhost:3000/index.tagmap
 
-# Generate a proto model
 
+# Generate a proto model (WIP...)
+
+	To be done...
+	
     rake generate protorails:model file.proto model
 
 This command will compile the proto definitions to ruby classes (using the ruby_protobuf gem).
@@ -38,8 +54,10 @@ This command will compile the proto definitions to ruby classes (using the ruby_
 If no model is provided, all the messages in the proto file will be compiled.
 If a model is provided, this command should generate only that specific model
 
-# Generate a scaffold
+# Generate a scaffold (WIP...)
 
+	To be done...
+	
     rake generate protorails:scaffold file.proto model
 
 This command will compile the proto and generate a controller to handle CRUD operations per each message:
